@@ -1,15 +1,16 @@
 (ns clojure-spellchecker.core
-  (:gen-class)
   (:require [clojure.string :as str]))
 
-(def word-list (slurp "resources/english-words.txt"))
+;loads words.txt, creates a list, trims white spaces and turns it into a set
+(def word-list
+  (set 
+   (map str/trim (str/split-lines (slurp "resources/english-words.txt")))))
 
-(str/split-lines word-list)
+(defn listed? [word] (contains? word word-list))
 
 
-
-
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+(defn -main [& args]
+  (let [word (first args)]
+    (if (listed? word)
+      (println "Correct.")
+      (println "Incorrect."))))
