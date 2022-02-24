@@ -3,8 +3,7 @@
 
 ;loads words.txt, creates a list, trims white spaces and turns it into a set
 (def word-list
-  (set 
-   (map str/trim (str/split-lines (slurp "resources/english-words.txt")))))
+  (set (map str/trim (str/split-lines (slurp "resources/english-words.txt")))))
 
 (defn listed? [word] (contains? word word-list))
 
